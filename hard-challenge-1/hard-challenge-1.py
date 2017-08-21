@@ -32,6 +32,9 @@ def set_range():
 def guess_correct(guess):
     print('{} is the guess, is that correct?'.format(guess))
     check = input('"y" if correct, "l" if too low, "h" if too high: ')
+    while check != 'y' or check != 'l' or check != 'h':
+        print('That\'s not a recognized command, try again.')
+        check = input('"y" if correct, "l" if too low, "h" if too high: ')
     return check
 
 def set_value(answer, guess):
@@ -49,7 +52,7 @@ def main():
     print('Lower bound: {}, Upper bound: {}'.format(lower, upper))
     answer = 'n'
     while answer != 'y':
-        print('current range: {}, {}'.format(lower, upper))
+        print('Current range: {}, {}'.format(lower, upper))
         guess = int((upper + lower) / 2)
         answer = guess_correct(guess)
         set_value(answer, guess)
