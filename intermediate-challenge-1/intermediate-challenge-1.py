@@ -13,7 +13,7 @@ def list_events():
 # fill in
 
 def add_event():
-    print('Add event:\n ----------------')
+    print('Add event:\n----------------')
     title = input('Enter event title: ')
     date = input('Enter the date (YYYY/MM/DD): ')
     time = input('Enter the start time (hour:min)')
@@ -44,7 +44,7 @@ def main():
     choice = '-1'
 
     while choice != 'q':
-        print('Options \n ----------------')
+        print('Options \n----------------')
         for key, option in options.items():
             print('{}, {}'.format(key, option[0]))
 
