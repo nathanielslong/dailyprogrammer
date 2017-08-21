@@ -3,7 +3,8 @@
 # no events hardcoded
 # each event will have the following:
 #   a title
-#   a date
+#   a date (original said by hour, but let's make it more interesting
+#   and do it by date as well)
 
 events = {}
 
@@ -12,7 +13,10 @@ def list_events():
 # fill in
 
 def add_event():
-    print('Add event:\n\n\n')
+    print('Add event:\n ----------------')
+    title = input('Enter event title: ')
+    date = input('Enter the date (YYYY/MM/DD): ')
+    time = input('Enter the start time (hour:min)')
 # fill in
 
 def remove_event():
