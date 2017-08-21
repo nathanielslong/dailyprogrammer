@@ -29,10 +29,31 @@ def set_range():
         print('Upper bound must be larger than the lower.')
         set_upper()
 
+def guess_correct(guess):
+    print('{} is the guess, is that correct?'.format(guess))
+    check = input('"y" if correct, "l" if too low, "h" if too high: ')
+    return check
 
-# top = 100
-# number_range = [1, 100]
-# guess = 50
+def set_value(answer, guess):
+    if answer == 'l':
+        global lower
+        lower = guess
 
-set_range()
-print('lower: {}, upper: {}'.format(lower, upper))
+    if answer == 'h':
+        global upper
+        upper = guess
+
+def main():
+    print('Guessing game: For ranges 1 to very large numbers.\n----------------')
+    set_range()
+    print('Lower bound: {}, Upper bound: {}'.format(lower, upper))
+    answer = 'n'
+    while answer != 'y':
+        print('current range: {}, {}'.format(lower, upper))
+        guess = int((upper + lower) / 2)
+        answer = guess_correct(guess)
+        set_value(answer, guess)
+    print('Your number was {}.'.format(guess))
+
+
+if __name__ == '__main__' : main()
