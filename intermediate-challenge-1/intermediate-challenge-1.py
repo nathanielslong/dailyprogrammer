@@ -1,44 +1,86 @@
-# events calendar-ish
-# can CRUD
-# no events hardcoded
-# each event will have the following:
-#   a title
-#   a date (original said by hour, but let's make it more interesting
-#   and do it by date as well)
-
 events = {}
 
 def list_events():
-    print('Events listed:\n\n\n')
-# fill in
+    print('Events:\n-----------------')
+    if len(events.keys()) == 0:
+        print('No events entered.')
+
+    else:
+        for hour in sorted(events.keys()):
+            print('Hour: {}, description: {}'.format(hour, events[hour]))
+
+    print()
+
+def valid_hour(hour):
+    if not hour.isdigit():
+        print('Not a positive numeric value, try again.')
+        return False
+
+    elif int(hour) < 0 or int(hour) > 23:
+        print('Not a valid hour, try again.')
+        return False
+
+    else:
+        return True
+
+def get_hour():
+    hour = input('Hour of event: ')
+    while not valid_hour(hour):
+        hour = input('Hour of event: ')
+
+    return int(hour)
 
 def add_event():
-    print('Add event:\n----------------')
-    title = input('Enter event title: ')
-    date = input('Enter the date (YYYY/MM/DD): ')
-    time = input('Enter the start time (hour:min)')
-# fill in
+    hour = get_hour()
+    if int(hour) in events:
+        print('Hour already taken.\n')
+        return
+
+    description = input('Description of event: ')
+    events[hour] = description
+    print('Event added.\n')
+
+def edit_event():
+    hour = get_hour()
+    if int(hour) not in events:
+        print('Hour not assigned, cannot edit.\n')
+        return
+
+    description = input('New description of event: ')
+    events[hour] = description
+    print('Event edited.\n')
 
 def remove_event():
-    print('Remove event:\n\n\n')
-# fill in
+    hour = get_hour()
+    if int(hour) not in events:
+        print('Hour not assigned, cannot delete.\n')
+        return
 
-def update_event():
-    print('Update event:\n\n\n')
-# fill in
+    choice = input('Are you sure? (y, n): ')
+    choices = ('y', 'n')
+    while choice not in choices:
+        print('Not a valid choice, try again.')
+        choice = input('Are you sure? (y, n): ')
+
+    if choice == choices[0]:
+        del events[hour]
+        print('Event deleted.\n')
+
+    elif choice == choices[1]:
+        print('Event not deleted.')
 
 def quit():
     return
 # fill in
 
 def main():
-    print('Welcome to the event planner!')
+    print('Welcome to the hourly event planner!')
 
     options = {
-            'l' : ('List events', list_events),
             'a' : ('Add event', add_event),
+            'e' : ('Edit event', edit_event),
+            'l' : ('List events', list_events),
             'r' : ('Remove event', remove_event),
-            'u' : ('Update event', update_event),
             'q' : ('Quit', quit)
             }
     choice = '-1'
