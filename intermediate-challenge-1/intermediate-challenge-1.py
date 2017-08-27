@@ -1,7 +1,11 @@
+import csv
+from pathlib import Path
+
 events = {}
 
 def list_events():
     print('Events:\n-----------------')
+    print(events)
     if len(events.keys()) == 0:
         print('No events entered.')
 
@@ -70,11 +74,23 @@ def remove_event():
         print('Event not deleted.')
 
 def quit():
-    return
-# fill in
+    with open('events.csv', 'w') as f:
+        writer = csv.writer(f)
+        for key, value in events.items():
+            writer.writerow([key, value])
+
+def fill_events():
+    with open('events.csv', 'r') as inf:
+        reader = csv.reader(inf)
+        events = dict(reader)
+        print(events)
 
 def main():
     print('Welcome to the hourly event planner!')
+
+    prior_events = Path('events.csv')
+    if prior_events.exists():
+        fill_events()
 
     options = {
             'a' : ('Add event', add_event),
@@ -83,8 +99,8 @@ def main():
             'r' : ('Remove event', remove_event),
             'q' : ('Quit', quit)
             }
-    choice = '-1'
 
+    choice = '-1'
     while choice != 'q':
         print('Options \n----------------')
         for key, option in options.items():
