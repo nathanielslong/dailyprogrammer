@@ -1,6 +1,14 @@
 state = 0
 space = [0, 0]
 
+locations = {
+        (0, 0) : ('Ah, home. Time to sleep!', 1),
+        (1, 0) : ('The mountains are here!', 0),
+        (-1, 0) : ('The hot volcano land!', 0),
+        (0, 1) : ('The sunset is so late here...', 0),
+        (0, -1) : ('The sun rises so early...', 0)
+        }
+
 def get_direction():
     directions = {
             'n' : 'North',
@@ -11,10 +19,10 @@ def get_direction():
 
     direction = input('What direction shall you go?\n')
     while direction not in directions.keys():
-        print('That\'s not a direction! Try again!')
+        print('That\'s not a direction! Try again!\n')
         direction = input('What direction shall you go?\n')
 
-    print('{} it is!'.format(directions[direction]))
+    print('{} it is!\n'.format(directions[direction]))
     return direction
 
 def move_to_space(direction):
@@ -39,7 +47,15 @@ def move_to_space(direction):
     print(space)
 
 def space_effect():
-    return
+    tuple_space = tuple(space)
+    if tuple_space in locations.keys():
+        print('{}\n'.format(locations[tuple_space][0]))
+        global state
+        state = locations[tuple_space][1]
+    else:
+        print('This space hasn\'t been implemented yet!\n')
+
+
 
 def main():
     username = input('What is your name?\n')
@@ -49,5 +65,7 @@ def main():
         direction = get_direction()
         move_to_space(direction)
         space_effect()
+
+    print('Thanks for playing, more levels later!')
 
 if __name__ == '__main__' : main()
