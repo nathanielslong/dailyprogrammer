@@ -4,28 +4,33 @@
 # write to file
 import datetime
 
-def start():
-    start = datetime.datetime.now().time()
-    print('Stopwatch started at {}.'.format(start))
 
-def stop():
-    end = datetime.datetime.now().time()
-    print('this')
+lap = 0
+
+def start():
+    start = datetime.datetime.now()
+    print('Stopwatch started at {}.'.format(start))
+    return start
+
+def stop(start):
+    end = datetime.datetime.now()
+    total = end - start
+    print('Time ended, total time: {}'.format(total))
 
 def lap():
     print('that')
 
 def main():
-    start()
-    user_input = input('Stop with "p", lap with "l".\n')
-    options = {
-            'p' : stop,
-            'l' : lap
-            }
-    while user_input not in options.keys():
-        print('Not recognized, try again.')
+        start_time = start()
+        options = {
+                'p' : stop,
+                'l' : lap
+                }
         user_input = input('Stop with "p", lap with "l".\n')
+        while user_input not in options.keys():
+            print('Not recognized, try again.')
+            user_input = input('Stop with "p", lap with "l".\n')
 
-    options[user_input]()
+        options[user_input](start_time)
 
 if __name__ == '__main__' : main()
