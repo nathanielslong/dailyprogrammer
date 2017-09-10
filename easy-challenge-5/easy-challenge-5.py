@@ -1,5 +1,6 @@
 import hashlib
 import os.path
+import getpass
 
 def dict_from_file():
     credentials = open('credentials.txt', 'r').read().split('\n')
@@ -20,13 +21,13 @@ def check_credentials(username, password):
     credentials = dict_from_file()
 
     for user, pass_val in credentials.items():
-        if user == username and pass_val == password:
+        if user == username and pass_val == hashlib.sha512(password.encode('utf-8')).hexdigest():
             return True
     return False
 
 def main():
     username = input('Welcome to the top secret program.\nUsername: ')
-    password = input('Password: ')
+    password = getpass.getpass('Password: ')
     if check_credentials(username, password):
         print('Welcome to the program, {}.'.format(username))
     else:
