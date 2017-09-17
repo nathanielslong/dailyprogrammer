@@ -20,8 +20,9 @@ def get_int(phrase):
     return abs(int(val))
 
 def main():
-    getcontext().prec = 30
     iterations = get_int('What iterative degree would you like? ')
+    decimals = get_int('What number of decimals? ')
+    getcontext().prec = decimals
     print('Pi: {}'.format(chudnovsky(iterations)))
 
 if __name__ == '__main__' : main()
