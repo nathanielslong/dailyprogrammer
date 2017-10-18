@@ -1,12 +1,12 @@
 tokens = {
         '+' : [0, False]
         '-' : [0, False],
-        '*' : 1,
-        '/' : 1,
-        '^' : 2,
-        '!' : 3,
-        '(' : 9,
-        ')' : 0
+        '*' : [1, False],
+        '/' : [1, False],
+        '^' : [2, False],
+        '!' : [3, False],
+        '(' : [9, True],
+        ')' : [0, True]
         }
 
 def get_input(inp = None):
@@ -16,13 +16,13 @@ def get_input(inp = None):
     return value
 
 def shunting(expression):
-    number_queue = []
+    output_queue = []
     token_queue = []
     for token in expression:
         if token.isdigit():
-            number_queue.append()
+            output_queue.append()
         elif token in tokens:
-
+            if token[1] != true:
 
 def main():
     print('Hello world')
